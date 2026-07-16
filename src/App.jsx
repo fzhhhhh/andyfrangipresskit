@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FiArrowDownRight, FiArrowUpRight, FiMenu, FiPause, FiPlay, FiPlus, FiX } from 'react-icons/fi';
+import { FiArrowDownRight, FiArrowUpRight, FiPause, FiPlay, FiPlus } from 'react-icons/fi';
 import { FaInstagram, FaSoundcloud, FaSpotify, FaYoutube } from 'react-icons/fa';
 import { SiBeatport } from 'react-icons/si';
 
@@ -37,7 +37,6 @@ const galleryImages = [
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [playing, setPlaying] = useState(true);
   const [scrolled, setScrolled] = useState(false);
 
@@ -79,8 +78,6 @@ function App() {
     return () => document.body.classList.remove('is-loading');
   }, [loading]);
 
-  const closeMenu = () => setMenuOpen(false);
-
   return (
     <main>
       <div className="scroll-progress" aria-hidden="true" />
@@ -93,12 +90,10 @@ function App() {
         <div className="loader-progress"><span /></div>
       </div>
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
-        <a href="#top" className="brand" aria-label="Andy Frangi, inicio"><img src="/media/logo-white.png" alt="Andy Frangi" /></a>
-        <nav className={menuOpen ? 'nav-open' : ''} aria-label="Navegación principal">
-          {['Bio', 'Music', 'Live', 'Press'].map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={closeMenu}>{item}</a>)}
-          <a href="https://www.instagram.com/djandyfrangi/" target="_blank" rel="noreferrer" onClick={closeMenu}>Booking <FiArrowUpRight /></a>
+        <nav aria-label="Navegación principal">
+          {['Bio', 'Music', 'Live', 'Press'].map((item) => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}
+          <a href="https://www.instagram.com/djandyfrangi/" target="_blank" rel="noreferrer">Booking <FiArrowUpRight /></a>
         </nav>
-        <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú">{menuOpen ? <FiX /> : <FiMenu />}</button>
       </header>
 
       <section className="hero" id="top">
