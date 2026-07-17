@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FiArrowDownRight, FiArrowUpRight, FiPause, FiPlay, FiPlus } from 'react-icons/fi';
+import { FiArrowDownRight, FiArrowUp, FiArrowUpRight, FiPause, FiPlay, FiPlus } from 'react-icons/fi';
 import { FaInstagram, FaSoundcloud, FaSpotify, FaYoutube } from 'react-icons/fa';
 import { SiBeatport } from 'react-icons/si';
 
@@ -199,7 +199,12 @@ function App() {
         <div className="social-row">{socials.map((social) => <a key={social.label} href={social.href} target="_blank" rel="noreferrer">{social.icon}<span>{social.label}</span><FiArrowUpRight /></a>)}</div>
       </section>
 
-      <footer><img src="/media/logo-white.png" alt="Andy Frangi" /><p>DJ & PRODUCER · ARGENTINA</p><span>© {new Date().getFullYear()} ANDY FRANGI</span></footer>
+      <footer>
+        <div className="footer-artist"><img src="/media/logo-white.png" alt="Andy Frangi" /><p>DJ & PRODUCER · ARGENTINA</p></div>
+        <a className="fzh-credit" href="https://wa.me/5493471632758" target="_blank" rel="noreferrer" aria-label="Contactar a FZH por WhatsApp"><span>Created by</span><img src="/media/fzh-logo.svg" alt="FZH" /></a>
+        <a className="back-to-top" href="#top"><span>Volver arriba</span><FiArrowUp /></a>
+        <span className="footer-copyright">© {new Date().getFullYear()} ANDY FRANGI</span>
+      </footer>
     </main>
   );
 }

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="240 390 780 470"
+     role="img"
+     aria-labelledby="title desc">
+  <title id="title">FZH monogram logo</title>
+  <desc id="desc">Geometric white FZH monogram with transparent background.</desc>
+
+  <g fill="#FFFFFF">
+    <!-- F + Z -->
+    <path d="
+      M266 420
+      H726
+      V492
+      L457 781
+      H864
+      L911 828
+      H403
+      V776
+      L681 471
+      H313
+      V577
+      H507
+      L465 622
+      H312
+      V828
+      H266
+      Z"/>
+
+    <!-- H -->
+    <path d="
+      M735 420
+      L781 454
+      V577
+      H940
+      V453
+      L987 420
+      V828
+      H941
+      V622
+      H782
+      V726
+      H735
+      Z"/>
+  </g>
+</svg>
