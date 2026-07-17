@@ -38,6 +38,8 @@ const galleryImages = [
 function App() {
   const [loading, setLoading] = useState(true);
   const [playing, setPlaying] = useState(true);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+  const [musicStarted, setMusicStarted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -48,7 +50,7 @@ function App() {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      document.documentElement.style.setProperty('--scroll-progress', `${maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0}%`);
+      document.documentElement.style.setProperty('--scroll-progress', maxScroll > 0 ? window.scrollY / maxScroll : 0);
       document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
     };
     window.addEventListener('scroll', onScroll);
@@ -78,9 +80,24 @@ function App() {
     return () => document.body.classList.remove('is-loading');
   }, [loading]);
 
+  const toggleMusic = () => {
+    const player = document.getElementById('youtube-audio-player');
+    const nextPlaying = !musicPlaying;
+    player?.contentWindow?.postMessage(JSON.stringify({
+      event: 'command',
+      func: nextPlaying ? 'playVideo' : 'pauseVideo',
+      args: [],
+    }), 'https://www.youtube.com');
+    setMusicPlaying(nextPlaying);
+    if (nextPlaying) setMusicStarted(true);
+  };
+
   return (
     <main>
-      <div className="scroll-progress" aria-hidden="true" />
+      <div className="scroll-progress-frame" aria-hidden="true">
+        <span className="progress-top" />
+        <span className="progress-bottom" />
+      </div>
       <div className={`loader ${loading ? '' : 'loader-done'}`} aria-hidden={!loading}>
         <div className="loader-mark">
           <img src="/media/af-logo.svg" alt="Andy Frangi" />
@@ -110,11 +127,23 @@ function App() {
           <span className="eyebrow">DJ · PRODUCER · ARGENTINA</span>
           <div className="hero-footer">
             <p>Progressive energy.<br />Deep emotion.</p>
-            <a href="#bio" className="round-link" aria-label="Descubrir"><FiArrowDownRight /></a>
+            <div className="hero-controls">
+              <button className={`hero-music-button ${musicPlaying ? 'is-playing' : ''}`} onClick={toggleMusic} aria-label={musicPlaying ? 'Pausar live set' : 'Reproducir live set'}>
+                <span className="music-icon">{musicPlaying ? <FiPause /> : <FiPlay />}</span>
+                <span>{musicPlaying ? 'Pause live set' : 'Play live set'}</span>
+              </button>
+              <a href="#bio" className="round-link" aria-label="Descubrir"><FiArrowDownRight /></a>
+            </div>
           </div>
         </div>
         <div className="hero-side">CAÑADA DE GÓMEZ · SANTA FE <span>—</span> EST. 2015</div>
       </section>
+
+      <div className={`audio-dock ${musicStarted ? 'is-visible' : ''}`}>
+        <iframe id="youtube-audio-player" src="https://www.youtube.com/embed/ygHx6dBGMV0?enablejsapi=1&playsinline=1&rel=0&loop=1&playlist=ygHx6dBGMV0" title="Andy Frangi live set — reproductor continuo" allow="autoplay; encrypted-media; picture-in-picture" />
+        <button onClick={toggleMusic} aria-label={musicPlaying ? 'Pausar música' : 'Continuar música'}>{musicPlaying ? <FiPause /> : <FiPlay />}</button>
+        <div><span>Now playing</span><strong>Andy Frangi · Live Set</strong></div>
+      </div>
 
       <div className="story-stage">
         <aside className="story-portrait" aria-hidden="true">
