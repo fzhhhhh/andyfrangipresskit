@@ -91,7 +91,10 @@ function App() {
       </div>
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
         <nav aria-label="Navegación principal">
-          {['Bio', 'Music', 'Live', 'Press'].map((item) => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}
+          <a href="#bio">Bio</a>
+          <a href="#music">Music</a>
+          <a href="#live-sets">Live</a>
+          <a href="#press">Press</a>
           <a href="https://www.instagram.com/djandyfrangi/" target="_blank" rel="noreferrer">Booking <FiArrowUpRight /></a>
         </nav>
       </header>
@@ -129,7 +132,7 @@ function App() {
           <div className="stats">
             <div className="stat-item"><strong>2015</strong><span>Inicio de carrera</span></div>
             <div className="stat-item"><strong>3</strong><span>Países</span></div>
-            <div className="stat-item"><strong>TOP 10</strong><span>Beatport</span></div>
+            <div className="stat-item"><strong>7+</strong><span>Releases</span></div>
           </div>
         </div>
       </section>
@@ -149,8 +152,18 @@ function App() {
       </section>
       </div>
 
+      <section className="live-sets-section" id="live-sets">
+        <div className="live-sets-head reveal">
+          <div><span className="section-index">03 / LIVE SETS</span><h2>FULL SET.<br />REAL ENERGY.</h2></div>
+          <a href="https://www.youtube.com/watch?v=ygHx6dBGMV0" target="_blank" rel="noreferrer">Watch on YouTube <FiArrowUpRight /></a>
+        </div>
+        <div className="live-set-frame reveal">
+          <iframe src="https://www.youtube.com/embed/ygHx6dBGMV0?rel=0" title="Andy Frangi live set" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen loading="lazy" />
+        </div>
+      </section>
+
       <section className="gallery-section" aria-label="Galería de Andy Frangi">
-        <div className="gallery-head"><div><span className="section-index">03 / MULTIMEDIA</span><h2>ON & OFF<br />THE BOOTH</h2></div><span className="gallery-motion-label">Auto sequence · 01—08</span></div>
+        <div className="gallery-head"><div><span className="section-index">04 / MULTIMEDIA</span><h2>ON & OFF<br />THE BOOTH</h2></div><span className="gallery-motion-label">Auto sequence · 01—08</span></div>
         <div className="gallery">
           <div className="gallery-track">
             {[...galleryImages, ...galleryImages].map((item, index) => <figure className="gallery-card" key={`${item.src}-${index}`} aria-hidden={index >= galleryImages.length}><img src={item.src} alt={index < galleryImages.length ? item.alt : ''} loading="lazy" /><figcaption><span>{String((index % galleryImages.length) + 1).padStart(2, '0')}</span>{item.label}</figcaption></figure>)}
@@ -161,12 +174,12 @@ function App() {
       <section className="live" id="live">
         <video id="live-video" autoPlay muted loop playsInline poster="/media/live.jpg" ref={(el) => { if (el && playing) el.play().catch(() => setPlaying(false)); }}><source src="/media/live.mp4" type="video/mp4" /></video>
         <div className="live-overlay" />
-        <div className="live-copy reveal"><span className="section-index">04 / LIVE</span><h2>FROM ARGENTINA<br />TO THE WORLD</h2><p>Buenos Aires · Rosario · Córdoba · Jujuy · Florianópolis · Morro de São Paulo · Ibiza</p></div>
+        <div className="live-copy reveal"><span className="section-index">05 / LIVE</span><h2>FROM ARGENTINA<br />TO THE WORLD</h2><p>Buenos Aires · Rosario · Córdoba · Jujuy · Florianópolis · Morro de São Paulo · Ibiza</p></div>
         <button className="video-control" onClick={() => { const v = document.getElementById('live-video'); if (playing) v.pause(); else v.play(); setPlaying(!playing); }} aria-label={playing ? 'Pausar video' : 'Reproducir video'}>{playing ? <FiPause /> : <FiPlay />}</button>
       </section>
 
       <section className="press" id="press">
-        <span className="section-index">05 / PRESS & BOOKING</span>
+        <span className="section-index">06 / PRESS & BOOKING</span>
         <h2 className="reveal">LET'S MAKE<br />SOMETHING MOVE.</h2>
         <div className="press-actions reveal">
           <a className="primary-cta" href="https://www.instagram.com/djandyfrangi/" target="_blank" rel="noreferrer">Booking inquiry <FiArrowUpRight /></a>
